@@ -11,16 +11,15 @@ test.describe('As a user, I am able to log in with my credentials', async () => 
     await dashboardPage.LeftNavBar.clickAdmin();
     await adminPage.clickAdd();
     await adminPage.createUser('Admin', 'Enabled', 'Orange test', randomUsername, password);
+    await adminPage.Header.logout();
   });
 
   test(`Verify that the user can log in successfully when provided the username and password correctly`, async ({ loginPage, dashboardPage }) => {
-    await loginPage.goTo();
     await loginPage.login(randomUsername, password);
     await expect(dashboardPage.page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
   });
 
   test(`Verify that the user can not log in successfully when providing username is empty`, async ({ loginPage }) => {
-    await loginPage.goTo();
     await loginPage.login('', password);
     await expect(loginPage.lblRequired, `“Required” message is displayed below the username textbox`).toBeVisible();
   });

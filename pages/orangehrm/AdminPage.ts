@@ -1,9 +1,11 @@
 import { Locator, Page } from '@playwright/test';
 import LeftNavBar from './LeftNavBar';
+import Header from './Header';
 
 class AdminPage {
   readonly page: Page;
   readonly LeftNavBar: LeftNavBar;
+  readonly Header: Header;
   readonly btnAdd: Locator;
 
   readonly btnUserRole: Locator;
@@ -18,6 +20,7 @@ class AdminPage {
   constructor(page: Page) {
     this.page = page;
     this.LeftNavBar = new LeftNavBar(page);
+    this.Header = new Header(page);
     this.btnAdd = page.getByRole('button', { name: 'Add' });
     this.btnUserRole = page.locator('.oxd-grid-item').filter({ hasText: 'User Role' }).locator('.oxd-select-text');
     this.btnStatus = page.locator('.oxd-grid-item').filter({ hasText: 'Status' }).locator('.oxd-select-text');
@@ -77,6 +80,10 @@ class AdminPage {
 
   async waitForUserCreationResponse() {
     await this.page.waitForResponse(resp => resp.url().includes('/api/v2/admin/users') && resp.request().method() === 'POST' && resp.status() === 200);
+  }
+
+  async logout() {
+    await this.Header.logout();
   }
 }
 
