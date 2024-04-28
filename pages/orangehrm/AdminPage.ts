@@ -21,7 +21,7 @@ class AdminPage {
     this.page = page;
     this.LeftNavBar = new LeftNavBar(page);
     this.Header = new Header(page);
-    this.btnAdd = page.getByRole('button', { name: 'Add' });
+    this.btnAdd = page.locator('.orangehrm-header-container button');
     this.btnUserRole = page.locator('.oxd-grid-item').filter({ hasText: 'User Role' }).locator('.oxd-select-text');
     this.btnStatus = page.locator('.oxd-grid-item').filter({ hasText: 'Status' }).locator('.oxd-select-text');
     this.txtUsername = page.locator('.oxd-grid-item').filter({ hasText: 'Username' }).locator('input');
@@ -42,7 +42,7 @@ class AdminPage {
 
   async clickAdd() {
     await this.btnAdd.click();
-    await this.page.waitForLoadState('load');
+    await this.page.waitForURL('https://opensource-demo.orangehrmlive.com/web/index.php/admin/saveSystemUser');
   }
 
   async fillEmployeeName(employeeName: string) {

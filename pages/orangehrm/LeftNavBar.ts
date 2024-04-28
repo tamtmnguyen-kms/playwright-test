@@ -7,7 +7,7 @@ class LeftNavBar {
 
   constructor(page: Page) {
     this.page = page;
-    this.menuAdmin = page.getByRole('navigation').locator('li', { hasText: 'Admin' });
+    this.menuAdmin = page.locator('.oxd-navbar-nav').locator('li', { hasText: 'Admin' });
   }
 
   async clickAdmin() {

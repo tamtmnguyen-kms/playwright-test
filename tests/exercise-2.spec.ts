@@ -16,6 +16,7 @@ test.describe('As a user, I am able to log in with my credentials', async () => 
 
   test(`Verify that the user can log in successfully when provided the username and password correctly`, async ({ loginPage, dashboardPage }) => {
     await loginPage.login(randomUsername, password);
+    await expect(dashboardPage.page).toHaveURL('https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index');
     await expect(dashboardPage.page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
   });
 
