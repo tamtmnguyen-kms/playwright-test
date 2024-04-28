@@ -5,7 +5,7 @@ test.describe('As a user, I am able to log in with my credentials', async () => 
   let randomUsername = `iam${Date.now().toString(36)}`;
   let password = 'userpw@123';
 
-  test.beforeEach(async ({ loginPage, dashboardPage, adminPage }) => {
+  test.beforeEach(`Precondition: Login as Admin and set up new user account`, async ({ loginPage, dashboardPage, adminPage }) => {
     await loginPage.goTo();
     await loginPage.login('Admin', 'admin123');
     await dashboardPage.LeftNavBar.clickAdmin();
